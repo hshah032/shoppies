@@ -4,10 +4,12 @@ import './App.css';
 import MovieList from './components/MovieList';
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
+import AddToFavorites from './components/AddToFavorites';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [favourites, setFavourites] = useState([]);
   //   {
   //   "Title": "Star Wars: Episode IV - A New Hope",
   //           "Year": "1977",
@@ -42,6 +44,11 @@ const App = () => {
     }
   };
 
+  const addFavouriteMovie = (movie) => {
+    const newFavouriteList =  [...favourites, movie];
+    setFavourites(newFavouriteList);
+  }
+
   useEffect(()=>{
     getMovieRequest(searchValue);
   }, [searchValue]);
@@ -54,7 +61,17 @@ const App = () => {
         
       </div>
       <div className = 'row'>
-        <MovieList movies = {movies} />
+        <MovieList 
+          movies = {movies}  
+          favouriteComponent={AddToFavorites} 
+          handleFavouriteClick={addFavouriteMovie}
+          />
+      </div>
+      <div className = 'row d-flex align-items0center mt-4 mb-4'>
+        <MovieListHeading heading='Favourites' />
+      </div>
+      <div className = 'row'>
+        <MovieList movies={favourites} favouriteComponent={AddToFavorites} />
       </div>
     </div>
   );
