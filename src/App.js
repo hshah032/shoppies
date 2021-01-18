@@ -48,8 +48,11 @@ const App = () => {
       setFavourites(newFavouriteList);
       saveToLocalStorage(newFavouriteList);
     }
+    else if (favourites.includes(movie)){
+      console.log("Already added, disable favorite button");
+    }
     else{
-      alert("Only 5 nominations allowed");
+      alert("Only Five Nominations please. ")
     }
    
   };
