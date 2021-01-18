@@ -14,7 +14,8 @@ const App = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const getMovieRequest = async (searchValue) => {
-    const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=2db75176`;
+    // const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=2db75176`;
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=5f38fee2`;
     const response = await fetch(url);
     const responseJson = await response.json();
 
@@ -31,7 +32,7 @@ const App = () => {
   useEffect(()=>{
     const movieFavourites = JSON.parse(
       localStorage.getItem('react-movie-app-favourites')
-    );
+    ) || [];
 
     setFavourites(movieFavourites);
   }, []);
